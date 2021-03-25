@@ -7,36 +7,47 @@ const result = document.getElementById('result');
 let bank = 1000;
 displayBank.textContent = bank;
 
+function showWin () {
+    result.textContent = "win!"
+}
+
+function showLose () {
+    result.textContent = "lose!"
+}
+
+function updateBank (bet) {
+    bank = bank + bet;
+    displayBank.textContent = bank;
+}
+
 highButton.addEventListener('click', () => {
     let random = Math.random();
-    //console.log(random);
+    let bet = Number(betInput.value);
     if(random < .5){
         // high loses
-        result.textContent = "lose!"
-        bank = bank - Number(betInput.value);
-        displayBank.textContent = bank;
+        showLose ();
+        updateBank (-1*bet);
     }
     else {
         // high wins
-        result.textContent = "win!"
-        bank = bank + Number(betInput.value);
-        displayBank.textContent = bank;
+        showWin ();
+        updateBank (bet);
     };
 });
 
 lowButton.addEventListener('click', () => {
     let random = Math.random();
+    let bet = Number(betInput.value);
     //console.log(random);
     if(random < .5){
         // low wins
-        result.textContent = "win!"
-        bank = bank + Number(betInput.value);
-        displayBank.textContent = bank;
+        showWin ();
+        updateBank (bet);
     }
     else {
         //low loses
-        result.textContent = "lose!"
-        bank = bank - Number(betInput.value);
-        displayBank.textContent = bank;
+        showLose ();
+        updateBank (-1*bet);
     }
+    displayBank.textContent = bank;
 });
